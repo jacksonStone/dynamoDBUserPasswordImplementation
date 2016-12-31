@@ -1,0 +1,50 @@
+doctype html
+html.
+  <head><link rel="icon" href="/favicon.ico" /></head>
+  <h1>Register User/Check Password</h1>
+  
+  <label>Username</label>
+  <input id="username"/>
+  <label>Password</label>
+  <input id="password" type="password"/>
+  <button onclick="createUser()">Register</button>
+  <button onclick="login()">Check Password</button>
+  
+  <script>
+  //Gets the signed URL, then uploads the file with the returned URL
+  function createUser(){
+    var username = document.getElementById("username").value,
+      password = document.getElementById("password").value,
+      xhttp = new XMLHttpRequest(),
+      requestParams = {
+        username: username,
+        password: password
+      };
+
+    xhttp.open('POST', '/create-user', true);
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4) {
+        alert(xhttp.response);
+      }
+    };
+    xhttp.send(JSON.stringify(requestParams));
+  }    
+  
+  function login(){
+    var username = document.getElementById("username").value,
+      password = document.getElementById("password").value,
+      xhttp = new XMLHttpRequest(),
+      requestParams = {
+        username: username,
+        password: password
+      };
+
+    xhttp.open('POST', '/check-password', true);
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4) {
+        alert(xhttp.response);
+      }
+    };
+    xhttp.send(JSON.stringify(requestParams));
+  }
+  </script>
